@@ -1,10 +1,9 @@
 
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
-import numpy as np
 import sqlite3
 import html 
-
+import os
 
 class DatabaseManager:
     def create_database(self):
@@ -78,11 +77,13 @@ class SearchRequestHandler(SimpleHTTPRequestHandler):
             super().do_GET()
         
 if __name__ == "__main__":
-    server_address = ("", 8000)
+    # Считываем порт от Render (или берем 8000 для локального запуска)
+    port = int(os.environ.get("PORT", 8000))
+    server_address = ("0.0.0.0", port)
+    
     httpd = HTTPServer(server_address, SearchRequestHandler)
-    print("Server running on http://localhost:8000")
+    print(f"Сервер запущен на порту {port}")
     httpd.serve_forever()
-
 
 
 # print("Enter the new user:")
