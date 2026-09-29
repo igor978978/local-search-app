@@ -1,0 +1,91 @@
+
+.table-container {
+    width: 100%;
+    max-height: 400px; /* Ограничение по высоте */
+    overflow-x: auto;  /* Горизонтальная прокрутка, если таблица широкая */
+    overflow-y: auto;  /* Вертикальная прокрутка, если много строк */
+    margin-top: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+
+body{
+    background: rgb(206, 198, 198);
+}
+.all{
+    height: 100%;
+    width: 100%;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.conteiner{
+    max-width: 1500px;
+    max-height: 1000px;
+}
+.head{
+    
+    
+    width: 1000px;
+}
+.left{
+    height: 600px;
+    background-color: azure;
+    width: 600px;
+    float: left;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    /* align-items: baseline; */
+    flex-direction: column;
+}
+.right{
+    height: 600px;
+    width: 400px;
+    background-color: aquamarine;
+    float: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+a{
+    text-decoration: none; color: black;
+}
+.ball{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 5px solid black;
+    margin: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.balls{
+    display: flex;
+    flex-direction: row;
+}
+.email{
+    height: 20px;
+    width: 100px;
+    background-color: white;
+}
+.button{
+    height: 30px;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20%;
+}
