@@ -1,6 +1,7 @@
 
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
+
 import sqlite3
 import html 
 import os
@@ -9,7 +10,11 @@ class DatabaseManager:
     def create_database(self):
         conn = sqlite3.connect(self.db_user)
         cursor = conn.cursor()
-        with open('SQL.sql', 'r') as f:
+
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        sql_file_path = os.path.join(base_dir, 'SQL.sql')
+        
+        with open(sql_file_path, 'r', encoding='utf-8') as f:
             sql_script = f.read()
         cursor.executescript(sql_script)
         conn.commit()
@@ -49,7 +54,10 @@ def build_table(results):
 def render_page(users, query=""):
     table_html = build_table(users)
     
-    with open("Untitled-2.html", "r", encoding="utf-8") as f:
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    template_path = os.path.join(base_dir, "Untitled-2.html")
+    
+    with open(template_path, "r", encoding="utf-8") as f:
         template = f.read()
 
     full_html = template.replace("{table_html}", table_html)
@@ -57,11 +65,12 @@ def render_page(users, query=""):
 
 
 db = DatabaseManager()
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 class SearchRequestHandler(SimpleHTTPRequestHandler):
     def do_GET(self):
         parsed_url = urlparse(self.path)
-
+            
         if parsed_url.path == "/":
             query_params = parse_qs(parsed_url.query)
             search_query = query_params.get("query", [""])[0]
